@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lojavirtualv2/commom/custom_drawer.dart';
 import 'package:lojavirtualv2/models/page_manager.dart';
+import 'package:lojavirtualv2/screens/cart/components/cart_button.dart';
 import 'package:lojavirtualv2/screens/login_screen.dart';
 import 'package:lojavirtualv2/screens/products/product_screen.dart';
 import 'package:provider/provider.dart';
@@ -22,6 +23,7 @@ class BaseScreen extends StatelessWidget {
               centerTitle: true,
             ),
             drawer: CustomDrawer(),
+            floatingActionButton: CartButton(),
           ),
           ProductScreen(),
           Scaffold(

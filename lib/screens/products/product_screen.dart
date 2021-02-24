@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lojavirtualv2/commom/custom_drawer.dart';
 import 'package:lojavirtualv2/models/product.dart';
 import 'package:lojavirtualv2/models/product_manager.dart';
+import 'package:lojavirtualv2/screens/cart/components/cart_button.dart';
 import 'package:lojavirtualv2/screens/products/components/product_list_tile.dart';
 import 'package:lojavirtualv2/screens/products/components/search_dialog.dart';
 import 'package:provider/provider.dart';
@@ -80,6 +81,7 @@ class ProductScreen extends StatelessWidget {
           );
         },
       ),
+      floatingActionButton: CartButton(),
     );
   }
 }
