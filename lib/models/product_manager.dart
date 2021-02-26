@@ -34,8 +34,17 @@ class ProductManager extends ChangeNotifier{
   Future<void> _loadAllProducts() async {
     final QuerySnapshot query =  await firestore.collection('products').get();
 
-    allProducts = query.docs.map((doc) => Product.fromDocument(doc)).toList();
+    allProducts = query.docs.map(
+            (doc) => Product.fromDocument(doc)).toList();
 
     notifyListeners();
+  }
+
+  Product findProductByID(String productId) {
+    try{
+      return allProducts.firstWhere((p) => p.id == productId);
+    } catch(e) {
+      return null;
+    }
   }
 }

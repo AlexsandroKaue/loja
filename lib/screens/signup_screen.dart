@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lojavirtualv2/helpers/validators.dart';
-import 'package:lojavirtualv2/models/user.dart';
+import 'package:lojavirtualv2/models/user.dart' as local;
 import 'package:lojavirtualv2/models/user_manager.dart';
 import 'package:provider/provider.dart';
 
@@ -10,7 +10,7 @@ class SignUpScreen extends StatelessWidget {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmController = TextEditingController();
-  UserData user = UserData();
+  local.User user = local.User();
 
   @override
   Widget build(BuildContext context) {

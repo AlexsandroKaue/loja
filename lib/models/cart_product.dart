@@ -59,7 +59,7 @@ class CartProduct extends ChangeNotifier {
   }
 
   num get unitPrice {
-    if(product == null) return null;
+    //if(product == null) return null;
     return itemSize?.price ?? 0;
   }
 

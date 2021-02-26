@@ -93,7 +93,7 @@ class LoginScreen extends StatelessWidget {
                             : () {
                                 if (_formKey.currentState.validate()) {
                                   userManager.signIn(
-                                      UserData(
+                                      User(
                                           email: _emailController.text,
                                           password: _passController.text),
                                       onFail: (errorCode) {

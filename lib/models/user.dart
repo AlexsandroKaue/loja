@@ -1,16 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class UserData {
+class User {
 
   String id;
   String name;
   String email;
   String password;
   String confirmPassword;
+  bool admin = false;
 
-  UserData({this.email, this.password, this.name, this.confirmPassword, this.id});
+  User({this.email, this.password, this.name, this.confirmPassword, this.id});
 
-  UserData.fromDocument(DocumentSnapshot document){
+  User.fromDocument(DocumentSnapshot document){
     id = document.id;
     name = document.data()['name'] as String;
     email = document.data()['email'] as String;

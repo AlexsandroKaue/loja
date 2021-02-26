@@ -7,7 +7,7 @@ import 'package:lojavirtualv2/models/user_manager.dart';
 
 class CartManager extends ChangeNotifier{
   List<CartProduct> items = [];
-  UserData user;
+  User user;
   num productsPrice = 0.0;
 
   Future<void> _loadCartItems() async {
@@ -44,7 +44,7 @@ class CartManager extends ChangeNotifier{
   }
 
   void updateUser(UserManager userManager) {
-    user = userManager.userData;
+    user = userManager.user;
     items.clear();
 
     if(user != null) {
