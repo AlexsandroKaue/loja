@@ -49,15 +49,23 @@ class ProductListTile extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Text(
-                      'R\$ 19,90',
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).primaryColor,
-
-                      ),
-                    )
+                    if(product.hasStock)
+                      Text(
+                        'R\$ ${product.basePrice.toStringAsFixed(2)}',
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                      )
+                    else
+                      const Text(
+                        'Produto indisponível',
+                        style: TextStyle(
+                          fontSize: 14.0,
+                          color: Colors.red,
+                        ),
+                      )
                   ],
                 ),
               )
