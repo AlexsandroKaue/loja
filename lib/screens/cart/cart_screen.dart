@@ -25,7 +25,9 @@ class CartScreen extends StatelessWidget {
                   }).toList(),
                 ),
                 PriceCard(
-                  onPressed: cartManager.isCartValid ? (){} : null,
+                  onPressed: cartManager.isCartValid ? (){
+                    Navigator.of(context).pushNamed('/address');
+                  } : null,
                   buttonText: 'Continuar para entrega',
                 )
               ],

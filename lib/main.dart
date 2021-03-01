@@ -5,12 +5,16 @@ import 'package:lojavirtualv2/models/cart_manager.dart';
 import 'package:lojavirtualv2/models/home_manager.dart';
 import 'package:lojavirtualv2/models/product.dart';
 import 'package:lojavirtualv2/models/product_manager.dart';
+import 'package:lojavirtualv2/models/section_item.dart';
+import 'package:lojavirtualv2/screens/address/address_screen.dart';
 import 'package:lojavirtualv2/screens/base_screen.dart';
 import 'package:lojavirtualv2/screens/cart/cart_screen.dart';
 import 'package:lojavirtualv2/screens/edit_product/edit_product_screen.dart';
 import 'package:lojavirtualv2/screens/login_screen.dart';
 import 'package:lojavirtualv2/screens/products/product_details_screen.dart';
+import 'package:lojavirtualv2/screens/select_product/select_product_screen.dart';
 import 'package:lojavirtualv2/screens/signup_screen.dart';
+import 'package:lojavirtualv2/services/cepaberto_service.dart';
 import 'package:provider/provider.dart';
 
 import 'models/user_manager.dart';
@@ -19,6 +23,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MyApp());
+
+  CepAbertoService().getAddressFromCep('61.925-560')
+      .then((address) => print(address));
 }
 
 class MyApp extends StatelessWidget {
@@ -76,6 +83,11 @@ class MyApp extends StatelessWidget {
                   builder: (_)
                   => CartScreen()
               );
+            case '/address':
+              return MaterialPageRoute(
+                  builder: (_)
+                    => AddressScreen()
+              );
             case '/login':
               return MaterialPageRoute(
                   builder: (_) => LoginScreen()
@@ -88,6 +100,11 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute(
                   builder: (_)
                     => EditProductScreen(setting.arguments as Product),
+              );
+            case '/select-product':
+              return MaterialPageRoute(
+                builder: (_)
+                => SelectProductScreen(),
               );
             case '/base':
             default:
