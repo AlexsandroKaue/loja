@@ -9,7 +9,12 @@ import 'package:lojavirtualv2/screens/login_screen.dart';
 import 'package:lojavirtualv2/screens/products/product_screen.dart';
 import 'package:provider/provider.dart';
 
-class BaseScreen extends StatelessWidget {
+class BaseScreen extends StatefulWidget {
+  @override
+  _BaseScreenState createState() => _BaseScreenState();
+}
+
+class _BaseScreenState extends State<BaseScreen> {
   final PageController pageController = PageController();
 
   @override

@@ -6,7 +6,9 @@ import 'package:lojavirtualv2/screens/edit_product/components/edit_item_size.dar
 
 class SizesForm extends StatelessWidget {
   final Product product;
-  const SizesForm(this.product);
+  SizesForm(this.product);
+
+  final GlobalKey<AnimatedListState> listKey = GlobalKey<AnimatedListState>();
 
   @override
   Widget build(BuildContext context) {
@@ -37,34 +39,76 @@ class SizesForm extends StatelessWidget {
                   color: Colors.black,
                   onTap: (){
                     state.value.add(ItemSize());
-                    state.didChange(state.value);
+                    listKey.currentState.insertItem(state.value.length-1,
+                        duration: const Duration(milliseconds: 800));
+                    //state.didChange(state.value);
                   },
                 )
               ],
             ),
-            Column(
-              children: state.value.map((size) {
-                return EditItemSize(
-                  key: ObjectKey(size),
-                  size: size,
-                  onRemove: (){
-                    state.value.remove(size);
-                    state.didChange(state.value);
-                  },
-                  onMoveUp: size != state.value.first ? (){
-                    final index = state.value.indexOf(size);
-                    state.value.remove(size);
-                    state.value.insert(index-1, size);
-                    state.didChange(state.value);
-                  } : null,
-                  onMoveDown: size != state.value.last ? (){
-                    final index = state.value.indexOf(size);
-                    state.value.remove(size);
-                    state.value.insert(index+1, size);
-                    state.didChange(state.value);
-                  } : null,
+            AnimatedList(
+              key: listKey,
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              initialItemCount: state.value.length,
+              itemBuilder: (context, index, animation) {
+                final ItemSize size = state.value[index];
+                return SlideTransition(
+                  position: Tween<Offset>(
+                    begin: const Offset(-1, 0),
+                    end: const Offset(0, 0),
+                  ).animate(animation),
+                  child: EditItemSize(
+                    key: ObjectKey(state.value[index]),
+                    size: size,
+                    onRemove: (){
+                      state.value.remove(size);
+                      listKey.currentState.removeItem(
+                        index, (_, animation) {
+                          return Container();
+                        },
+                        duration: const Duration(milliseconds: 800)
+                      );
+                    },
+                    onMoveUp: size != state.value.first ? (){
+                      final index = state.value.indexOf(size);
+                      state.value.remove(size);
+                      state.value.insert(index-1, size);
+                      state.didChange(state.value);
+                    } : null,
+                    onMoveDown: size != state.value.last ? (){
+                      final index = state.value.indexOf(size);
+                      state.value.remove(size);
+                      state.value.insert(index+1, size);
+                      state.didChange(state.value);
+                    } : null,
+                  ),
                 );
-              }).toList(),
+              },
+              /*child: Column(
+                children: state.value.map((size) {
+                  return EditItemSize(
+                    key: ObjectKey(size),
+                    size: size,
+                    onRemove: (){
+                      state.value.remove(size);
+                      state.didChange(state.value);
+                    },
+                    onMoveUp: size != state.value.first ? (){
+                      final index = state.value.indexOf(size);
+                      state.value.remove(size);
+                      state.value.insert(index-1, size);
+                      state.didChange(state.value);
+                    } : null,
+                    onMoveDown: size != state.value.last ? (){
+                      final index = state.value.indexOf(size);
+                      state.value.remove(size);
+                      state.value.insert(index+1, size);
+                      state.didChange(state.value);
+                    } : null,
+                  );
+                }).toList(),
+              ),*/
             ),
             if(state.hasError)
               Container(
@@ -81,4 +125,7 @@ class SizesForm extends StatelessWidget {
       }
     );
   }
+
+
+
 }

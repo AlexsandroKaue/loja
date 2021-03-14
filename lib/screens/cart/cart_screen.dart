@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lojavirtualv2/commom/empty_card.dart';
+import 'package:lojavirtualv2/commom/login_card.dart';
 import 'package:lojavirtualv2/commom/price_card.dart';
 import 'package:lojavirtualv2/models/cart_manager.dart';
 import 'package:lojavirtualv2/models/user_manager.dart';
@@ -16,6 +18,17 @@ class CartScreen extends StatelessWidget {
       body: Consumer2<CartManager, UserManager>(
         builder: (_, cartManager, userManager, __){
 
+          if(!userManager.isLoggedIn) {
+            return LoginCard();
+          }
+
+          if(cartManager.items.isEmpty) {
+            return const EmptyCard(
+              text: 'O carrinho está vazio',
+              iconData: Icons.remove_shopping_cart
+            );
+          }
+
           return userManager.isLoggedIn
             ? ListView(
               children: [
@@ -31,43 +44,7 @@ class CartScreen extends StatelessWidget {
                   buttonText: 'Continuar para entrega',
                 )
               ],
-            ) : Container(
-            color: Colors.white,
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.remove_shopping_cart,
-                  size: 80.0,
-                  color: Theme.of(context).primaryColor,
-                ),
-                const SizedBox( height: 16.0,),
-                const Text(
-                  "Faça login para acessar seu carrinho!",
-                  style:
-                  TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 16.0,),
-                Container(
-                  height: 45.0,
-                  child: RaisedButton(
-                      textColor: Colors.white,
-                      color: Theme.of(context).primaryColor,
-                      onPressed: () {
-                        Navigator.of(context).pushNamed('/login');
-                      },
-                    child: const Text(
-                      "Entrar",
-                      style: TextStyle(fontSize: 18.0),
-                    )
-                  ),
-                ),
-              ],
-            ),
-          );
+            ) : LoginCard();
         },
       ),
     );

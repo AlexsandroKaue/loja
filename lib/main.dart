@@ -5,7 +5,6 @@ import 'package:lojavirtualv2/models/cart_manager.dart';
 import 'package:lojavirtualv2/models/home_manager.dart';
 import 'package:lojavirtualv2/models/product.dart';
 import 'package:lojavirtualv2/models/product_manager.dart';
-import 'package:lojavirtualv2/models/section_item.dart';
 import 'package:lojavirtualv2/screens/address/address_screen.dart';
 import 'package:lojavirtualv2/screens/base_screen.dart';
 import 'package:lojavirtualv2/screens/cart/cart_screen.dart';
@@ -14,7 +13,6 @@ import 'package:lojavirtualv2/screens/login_screen.dart';
 import 'package:lojavirtualv2/screens/products/product_details_screen.dart';
 import 'package:lojavirtualv2/screens/select_product/select_product_screen.dart';
 import 'package:lojavirtualv2/screens/signup_screen.dart';
-import 'package:lojavirtualv2/services/cepaberto_service.dart';
 import 'package:provider/provider.dart';
 
 import 'models/user_manager.dart';
@@ -24,8 +22,8 @@ void main() async {
   await Firebase.initializeApp();
   runApp(MyApp());
 
-  CepAbertoService().getAddressFromCep('61.925-560')
-      .then((address) => print(address));
+  /*CepAbertoService().getAddressFromCep('61.925-560')
+      .then((address) => print(address));*/
 }
 
 class MyApp extends StatelessWidget {

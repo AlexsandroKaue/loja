@@ -72,6 +72,7 @@ class CartProduct extends ChangeNotifier {
     if(size != null){
       return size.stock >= quantity;
     }
+    return false;
   }
 
 
